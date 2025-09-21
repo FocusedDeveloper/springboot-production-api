@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/testdb
-    username: test
-    password: test
+    username: ${POSTGRES_USER:test}
+    password: ${POSTGRES_PASSWORD:test}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -10,6 +10,11 @@ spring:
     open-in-view: false
   flyway:
     locations: classpath:db/migration
+
+jwt:
+  secret: ${JWT_SECRET:change-me-please-change-me-please-change-me-please-64}
+  issuer: school-api
+  access-token-minutes: 60
 
 management:
   endpoints:
