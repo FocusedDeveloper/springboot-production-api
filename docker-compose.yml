@@ -15,3 +15,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  api:
+    build: .
+    env_file: .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+    ports: ["8080:8080"]
+    depends_on:
+      db:
+        condition: service_healthy
